@@ -1,35 +1,39 @@
 from abc import ABC, abstractmethod
 
-class computador(ABC):
+class Computador(ABC):
     def __init__(self, modelo, cor, preco):
-        self.modelo = modelo 
+        self.modelo = modelo
         self.cor = cor
-        self.preco = preco 
+        self.preco = preco
 
     def getInformacoes(self):
-        return f"Modelo: {self.modelo}, Cor:{self.cor}, Preço:{self.preco}"
-    
+        return f"Modelo: {self.modelo}, Cor: {self.cor}, Preço: {self.preco}"
 
-    @abstractmethod 
+    @abstractmethod
     def cadastrar(self):
-        pass 
+        pass
 
-class Desktop(computador):
-    def __init__(self, modelo, cor, preco, potencia_da_fonte):
-        super().__init__(modelo, cor, preco)        
-        self._potenciadafonte = potencia_da_fonte
-
-    def getInformacoes(self):
-        return f"{super().getInformacoes()}, Potencia da fonte:{self._potenciadafonte}"
-
-class Notebook(computador):
-    def __init__(self, modelo, cor, preco, tempo_batera):
+class Desktop(Computador):
+    def __init__(self, modelo, cor, preco, potenciaDaFonte):
         super().__init__(modelo, cor, preco)
-        self.__tempo_batera = tempo_batera
+        self._potenciaDaFonte = potenciaDaFonte
 
     def getInformacoes(self):
-        return f"{super().imprimir()}, Tempo da Bateria:{self.__tempo_batera}"
+        return f"{super().getInformacoes()}, Potência da Fonte: {self._potenciaDaFonte}"
 
+    def cadastrar(self):
+        print("Cadastrando Desktop...")
+
+class Notebook(Computador):
+    def __init__(self, modelo, cor, preco, tempoDeBateria):
+        super().__init__(modelo, cor, preco)
+        self.__tempoDeBateria = tempoDeBateria
+   
+    def getInformacoes(self):
+        return f"{super().getInformacoes()}, Tempo de Bateria: {self.__tempoDeBateria}"
+   
+    def cadastrar(self):
+        print("Cadastrando  o Notebook...")
 
 
 pc  = Desktop ("Msi", "Branco", 289789.00, "550W")
@@ -37,5 +41,7 @@ pc  = Desktop ("Msi", "Branco", 289789.00, "550W")
 note = Notebook ("dell", "vermelho", 1431.00, "440")
 
 
+pc.cadastrar()
+note.cadastrar()
 print(pc.getInformacoes())
 print(note.getInformacoes())
